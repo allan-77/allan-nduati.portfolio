@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allan Alan · Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 50px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.03);
+        }
+
+        /* simple header */
+        .header {
+            margin-bottom: 40px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 30px;
+        }
+
+        .name {
+            font-size: 42px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .title {
+            font-size: 20px;
+            color: #4a4a4a;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        /* profile section */
+        .profile-section {
+            display: flex;
+            gap: 40px;
+            margin: 40px 0;
+            align-items: start;
+        }
+
+        .profile-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #eaeaea;
+        }
+
+        .profile-fallback {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #666;
+            border: 1px solid #eaeaea;
+        }
+
+        .bio {
+            flex: 1;
+        }
+
+        .bio p {
+            font-size: 17px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* contact info - clickable links */
+        .contact-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 20px 0 30px;
+            padding: 15px 0;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .contact-item a {
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .contact-item a:hover {
+            color: #000;
+            border-bottom: 1px solid #666;
+        }
+
+        .contact-item .label {
+            color: #888;
+            font-style: italic;
+        }
+
+        /* section headings */
+        .section-heading {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 40px 0 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000;
+        }
+
+        /* experience entries */
+        .exp-item {
+            margin-bottom: 30px;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .exp-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .exp-date {
+            color: #666;
+            font-style: italic;
+        }
+
+        .exp-company {
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .exp-desc {
+            list-style: none;
+        }
+
+        .exp-desc li {
+            margin-bottom: 8px;
+            color: #333;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .exp-desc li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #999;
+        }
+
+        /* skills */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .skill-item {
+            background: #f8f8f8;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 15px;
+            color: #333;
+            border: 1px solid #eaeaea;
+        }
+
+        /* projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .project-item {
+            break-inside: avoid;
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-live {
+            font-size: 12px;
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 20px;
+            color: #555;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-desc {
+            color: #444;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tech-tag {
+            font-size: 13px;
+            color: #666;
+            background: #f5f5f5;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .project-link:hover {
+            color: #000;
+            border-bottom: 1px solid #666;
+        }
+
+        /* education */
+        .edu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .edu-item:last-child {
+            border-bottom: none;
+        }
+
+        .edu-left h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #000;
+        }
+
+        .edu-left p {
+            color: #555;
+        }
+
+        .edu-year {
+            color: #666;
+            font-style: italic;
+        }
+
+        .certs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .cert {
+            color: #555;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .cert::before {
+            content: "▹";
+            color: #666;
+        }
+
+        /* contact section */
+        .contact-section {
+            margin: 50px 0 30px;
+            padding: 30px;
+            background: #fafafa;
+            border: 1px solid #f0f0f0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-left h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .contact-left p {
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .contact-detail .icon {
+            width: 36px;
+            height: 36px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .contact-detail .info h4 {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        .contact-detail .info p {
+            color: #666;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .contact-detail .info a {
+            color: #666;
+            text-decoration: none;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .contact-detail .info a:hover {
+            color: #000;
+            border-bottom: 1px solid #666;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #eaeaea;
+            margin-bottom: 15px;
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            background: white;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #aaa;
+        }
+
+        .contact-form button {
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .contact-form button:hover {
+            background: #333;
+        }
+
+        /* footer with clickable links */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #f0f0f0;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            margin-top: 10px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .footer-links a:hover {
+            color: #000;
+            border-bottom: 1px solid #666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* print-friendly */
+        @media print {
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .contact-form {
+                display: none;
+            }
+            .contact-item a, .footer-links a, .project-link, .info a {
+                text-decoration: none;
+                color: #000;
+                border-bottom: none;
+            }
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .exp-header {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- header -->
+        <div class="header">
+            <div class="name">Allan Nduati</div>
+            <div class="title">full-stack developer</div>
+        </div>
+
+        <!-- profile with image -->
+        <div class="profile-section">
+            <div>
+                <img src="dp.jpeg" alt="Allan Nduati" class="profile-image" id="profileImg" onerror="handleImageError()">
+                <div class="profile-fallback hidden" id="profileFallback">AA</div>
+            </div>
+            <div class="bio">
+                <p>
+                    I'm a developer with a Diploma in Information Technology from KCA University. 
+                    I build web applications and desktop systems that solve real problems. 
+                    Currently working at Kenya College of Interior Design, where I develop internal tools 
+                    and maintain the network infrastructure.
+                </p>
+                <p>
+                    I'm looking for a full-time role where I can contribute and grow as a developer.
+                </p>
+            </div>
+        </div>
+
+        <!-- contact information - all clickable -->
+        <div class="contact-list">
+            <div class="contact-item">
+                <span class="label">email</span>
+                <a href="mailto:nduatiallan127@gmail.com">nduatiallan127@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <span class="label">phone</span>
+                <a href="tel:+254768393664">+254 768 393 664</a>
+            </div>
+            <div class="contact-item">
+                <span class="label">location</span>
+                <span>nairobi, kenya</span>
+            </div>
+            <div class="contact-item">
+                <span class="label">github</span>
+                <a href="https://github.com/allan" target="_blank">github.com/allan</a>
+            </div>
+            <div class="contact-item">
+                <span class="label">linkedin</span>
+                <a href="https://www.linkedin.com/in/allan-kihungi-138779311/" target="_blank">/in/allan-kihungi-138779311/</a>
+            </div>
+        </div>
+
+        <!-- experience -->
+        <div class="section-heading">experience</div>
+        
+        <div class="exp-item">
+            <div class="exp-header">
+                <div class="exp-title">IT Developer</div>
+                <div class="exp-date">2026 — present</div>
+            </div>
+            <div class="exp-company">Kenya College of Interior Design · Nairobi</div>
+            <ul class="exp-desc">
+                <li>developing internal web applications for student management (200+ users)</li>
+                <li>managing network security and conducting system audits using Nmap</li>
+                <li>providing technical support across 5 departments</li>
+                <li>reduced IT tickets by 30% through improved documentation</li>
+            </ul>
+        </div>
+
+        <div class="exp-item">
+            <div class="exp-header">
+                <div class="exp-title">Freelance Developer</div>
+                <div class="exp-date">2024 — 2025</div>
+            </div>
+            <div class="exp-company">various clients · Nairobi</div>
+            <ul class="exp-desc">
+                <li>built POS systems for 3 local retail shops (still in production)</li>
+                <li>developed responsive websites for small businesses</li>
+                <li>set up networks and IT systems for 5+ clients</li>
+                <li>handled full project lifecycle from requirements to deployment</li>
+            </ul>
+        </div>
+
+        <!-- skills -->
+        <div class="section-heading">technical skills</div>
+        
+        <div class="skills-list">
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">React</span>
+            <span class="skill-item">Node.js</span>
+            <span class="skill-item">PHP</span>
+            <span class="skill-item">VB.NET</span>
+            <span class="skill-item">MySQL</span>
+            <span class="skill-item">HTML/CSS</span>
+            <span class="skill-item">Apache</span>
+            <span class="skill-item">Networking</span>
+            <span class="skill-item">Nmap</span>
+            <span class="skill-item">API Design</span>
+            <span class="skill-item">System Administration</span>
+        </div>
+
+        <!-- projects -->
+        <div class="section-heading">projects</div>
+        
+        <div class="project-grid">
+            <div class="project-item">
+                <div class="project-title">
+                    LMS Platform
+                    <span class="project-live">.</span>
+                </div>
+                <div class="project-desc">
+                    Learning management system with course management, user authentication, and progress tracking. Currently used by 100+ students.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">Apache</span>
+                    <span class="tech-tag">HTML/CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <a href="#" class="project-link">view live →</a>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">POS System</div>
+                <div class="project-desc">
+                    Desktop point-of-sale application for retail. Handles sales, inventory management, and customer data. Used by 3 shops daily.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">VB.NET</span>
+                    <span class="tech-tag">SQL Server</span>
+                    <span class="tech-tag">Crystal Reports</span>
+                </div>
+                <a href="#" class="project-link">case study →</a>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">School Website</div>
+                <div class="project-desc">
+                    Responsive institutional website with event calendar, student portal, and content management system.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML/CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">MySQL</span>
+                </div>
+                <a href="#" class="project-link">visit site →</a>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">Network Monitoring Tool</div>
+                <div class="project-desc">
+                    Internal tool for monitoring network health and generating reports using Nmap and custom scripts.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Nmap</span>
+                    <span class="tech-tag">Bash</span>
+                </div>
+                <a href="#" class="project-link">view on github →</a>
+            </div>
+        </div>
+
+        <!-- education & certifications -->
+        <div class="section-heading">education</div>
+        
+        <div class="edu-item">
+            <div class="edu-left">
+                <h3>Diploma in Information Technology</h3>
+                <p>KCA University · Nairobi</p>
+            </div>
+            <div class="edu-year">2022 — 2024</div>
+        </div>
+
+        <div class="certs">
+            <span class="cert">Cybersecurity Essentials · Cisco</span>
+            <span class="cert">Network Security (Nmap) Certified</span>
+            <span class="cert">Full-Stack Development Certificate</span>
+        </div>
+
+        <!-- contact section -->
+        <div class="contact-section">
+            <div class="contact-grid">
+                <div class="contact-left">
+                    <h3>let's work together</h3>
+                    <p>
+                        I'm currently seeking full-time opportunities. Available for interviews 
+                        and can start immediately.
+                    </p>
+                    
+                    <div class="contact-detail">
+                        <div class="icon">📧</div>
+                        <div class="info">
+                            <h4>email</h4>
+                            <p><a href="mailto:nduatiallan127@gmail.com">nduatiallan127@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="icon">📱</div>
+                        <div class="info">
+                            <h4>phone</h4>
+                            <p><a href="tel:+254768393664">+254 768 393 664</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="icon">💼</div>
+                        <div class="info">
+                            <h4>linkedin</h4>
+                            <p><a href="https://linkedin.com/in/allan-alan" target="_blank">linkedin.com/in/allan-alan</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="icon">💻</div>
+                        <div class="info">
+                            <h4>github</h4>
+                            <p><a href="https://github.com/allan" target="_blank">github.com/allan</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form action="#" method="POST">
+                        <input type="text" placeholder="your name" required>
+                        <input type="email" placeholder="email address" required>
+                        <textarea rows="4" placeholder="message" required></textarea>
+                        <button type="submit">send message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer with clickable links -->
+        <div class="footer">
+            <p>© 2026 Allan Nduati · portfolio</p>
+            <div class="footer-links">
+                <a href="https://github.com/allan" target="_blank">github</a>
+                <a href="https://www.linkedin.com/in/allan-kihungi-138779311/" target="_blank">linkedin</a>
+                <a href="#" download>download resume (pdf)</a>
+                <a href="mailto:nduatiallan127@gmail.com">email</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleImageError() {
+            document.getElementById('profileImg').classList.add('hidden');
+            document.getElementById('profileFallback').classList.remove('hidden');
+        }
+
+        window.addEventListener('load', function() {
+            const img = document.getElementById('profileImg');
+            if (img.complete && img.naturalHeight === 0) handleImageError();
+        });
+    </script>
+</body>
+</html>
